@@ -9,6 +9,7 @@ public class MapGenerator : MonoBehaviour
 
     public int mapWidth;
     public int mapHeight;
+    public int mapDepth;
     public float noiseScale;
 
     public int octaves;
@@ -39,24 +40,10 @@ public class MapGenerator : MonoBehaviour
                     if (currentHeight <= regions[i].height)
                     {
                         colorMap[y * mapWidth + x] = regions[i].color;
-
-                        break;
                     }
                 }
             }
         }
-
-        MapDisplay display = FindObjectOfType<MapDisplay>();
-
-        if (drawMode == DrawMode.NoiseMap)
-        {
-            display.DrawTexture(TextureGenerator.TextureFromHeightMap(noiseMap));
-        }
-        else if (drawMode == DrawMode.ColorMap)
-        {
-            display.DrawTexture(TextureGenerator.TextureFromColorMap(colorMap, mapWidth, mapHeight));
-        }
-        
     }
 
     private void OnValidate()
